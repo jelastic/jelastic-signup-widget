@@ -1,0 +1,25 @@
+{
+  "path": {
+    "base": {
+      "src":"assets/",
+      "dest": "./html/",
+      "desthtml": "./html/**/*.{html,htm,php}"
+    },
+    "images": {
+      "src": "assets/img/",
+      "srcimg": "assets/img/**/*.{png,jpg,jpeg,gif,svg}",
+      "dest": "./html/img/"
+    },
+    "styles": {
+      "src": "assets/scss/",
+      "srcfiles": "assets/scss/**/*.scss",
+      "css": "assets/css/",
+      "cssfiles": "assets/css/**/*.css",
+      "dest": "./html/css/"
+    },
+    "scripts": {
+      "src": "assets/js/**",
+      "dest": "./html/js/"
+    }
+  }
+}
