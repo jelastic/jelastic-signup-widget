@@ -8,6 +8,7 @@ $color-gray : #efefef;
 $color-medium : #6b758a;
 $color-dark : #5e6981;
 $color-red : red;
+$color-default: $color-blue;
 
 $bdrs: 10px;
 $width: 280px;
@@ -58,7 +59,7 @@ $font-family: 'Open Sans', sans-serif;
   border-radius: $bdrs;
   outline: none;
   background: none;
-  background-color: $color-blue;
+  background-color: $color-default;
 
   font-family: $font-family;
   font-size: 20px;
@@ -70,7 +71,7 @@ $font-family: 'Open Sans', sans-serif;
   }
 
   &:hover {
-    background-color: lighten($color-blue, 5%);
+    background-color: lighten($color-default, 5%);
   }
 }
 
@@ -157,7 +158,7 @@ $font-family: 'Open Sans', sans-serif;
 
   cursor: pointer;
 
-  background-color: $color-blue;
+  background-color: $color-default;
   // background-image: url(../img/right-arrow.svg);
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIuMTcxIDUxMi4xNzEiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik01MDkuMDM1IDI0OC4yMTJsLTIxMy41MDQtMjEyLjhjLTMuMDUxLTMuMDI5LTcuNTk1LTMuOTA0LTExLjYyNy0yLjMwNGExMC42NyAxMC42NyAwIDAgMC02LjU3MSA5Ljg1NnYxMTcuMzMzSDEwLjY2N0M0Ljc3OSAxNjAuMjk4IDAgMTY1LjA3NiAwIDE3MC45NjR2MTcwLjY2N2MwIDUuODg4IDQuNzc5IDEwLjY2NyAxMC42NjcgMTAuNjY3aDI2Ni42Njd2MTE2Ljg4NWMwIDQuMzA5IDIuNjAzIDguMTkyIDYuNTkyIDkuODU2IDEuMzIzLjU1NSAyLjcwOS44MTEgNC4wNzUuODExIDIuNzczIDAgNS41MDQtMS4wODggNy41NTItMy4xMTVsMjEzLjUwNC0yMTMuNDE5YTEwLjY1NSAxMC42NTUgMCAwIDAgMy4xMTUtNy41NTIgMTAuNjgyIDEwLjY4MiAwIDAgMC0zLjEzNy03LjU1MnoiLz48L3N2Zz4=");
   background-repeat: no-repeat;

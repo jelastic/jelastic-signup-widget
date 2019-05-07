@@ -2,24 +2,23 @@
   "path": {
     "base": {
       "src":"assets/",
-      "dest": "./html/",
-      "desthtml": "./html/**/*.{html,htm,php}"
+      "dest": "./dist/",
+      "desthtml": "./dist/**/*.{html,htm,php}"
     },
     "images": {
       "src": "assets/img/",
       "srcimg": "assets/img/**/*.{png,jpg,jpeg,gif,svg}",
-      "dest": "./html/img/"
+      "dest": "./dist/img/"
     },
     "styles": {
       "src": "assets/scss/",
       "srcfiles": "assets/scss/**/*.scss",
       "css": "assets/css/",
-      "cssfiles": "assets/css/**/*.css",
-      "dest": "./html/css/"
+      "dest": "./dist/"
     },
     "scripts": {
       "src": "assets/js/**",
-      "dest": "./html/js/"
+      "dest": "./dist/"
     }
   }
 }
