@@ -49,7 +49,7 @@ Also you can edit default label and hoster in the `assets/js/jlcwidget.js` file 
 
 You can customise this widget with build system based on Gulp with [SCSS](https://sass-lang.com) preprocessor
 
-### Getting Started
+### How to Build
 
 Requires [Node.js](https://nodejs.org/) v6+ and [Gulp](https://gulpjs.com/) v4+ to run.
 
