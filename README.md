@@ -1,6 +1,10 @@
 # Jelastic Signup Widget
-![Jelastic](https://jelastic.com/wp-content/themes/salient/img/logo.svg =250x)
+![Jelastic](https://jelastic.com/wp-content/themes/salient/img/logo.svg =250x300)
 ![Jelastic](https://i.imgur.com/SyaxmHOg.png)
+
+`
+<img src="https://jelastic.com/wp-content/themes/salient/img/logo.svg" width="48">
+`
 
 
 This widget was created specifically for easy installation on any page and does not require any additional dependencies.
