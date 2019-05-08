@@ -1,4 +1,4 @@
-# Jelastic Signup Widget <img src="https://jelastic.com/wp-content/themes/salient/img/logo.svg" alt="Jelastic Signup Widget" width="180"/>
+# <img src="https://jelastic.com/wp-content/themes/salient/img/logo.svg" alt="Jelastic Signup Widget" width="180"/> Signup Widget 
 
 ![Jelastic](https://i.imgur.com/SyaxmHOg.png)
 
