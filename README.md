@@ -1,11 +1,6 @@
-# Jelastic Signup Widget
-![Jelastic](https://jelastic.com/wp-content/themes/salient/img/logo.svg =250x300)
+# Jelastic Signup Widget <img src="https://jelastic.com/wp-content/themes/salient/img/logo.svg" alt="Jelastic Signup Widget" width="180"/>
+
 ![Jelastic](https://i.imgur.com/SyaxmHOg.png)
-
-<img src="https://jelastic.com/wp-content/themes/salient/img/logo.svg" alt="Your image title" width="250"/>
-
-Here is an inline ![smiley](https://jelastic.com/wp-content/themes/salient/img/logo.svg){:height="36px" width="36px"}.
-
 
 This widget was created specifically for easy installation on any page and does not require any additional dependencies.
 It bases on usual html, js and css installed in all modern browsers.
