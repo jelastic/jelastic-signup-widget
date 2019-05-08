@@ -1,5 +1,7 @@
 # Jelastic Signup Widget
 ![Jelastic](https://jelastic.com/wp-content/themes/salient/img/logo.svg)
+![Jelastic](https://imgur.com/SyaxmHO)
+
 
 This widget was created specifically for easy installation on any page and does not require any additional dependencies.
 It bases on usual html, js and css installed in all modern browsers.
