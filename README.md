@@ -1,5 +1,5 @@
 # Jelastic Signup Widget
-![Jelastic](https://jelastic.com/wp-content/themes/salient/img/logo.svg)
+![Jelastic](https://jelastic.com/wp-content/themes/salient/img/logo.svg =250x)
 ![Jelastic](https://i.imgur.com/SyaxmHOg.png)
 
 
