@@ -12,8 +12,8 @@ In the image, you can check the default view of the widget during all of the sta
 ## Integrate Widget
 
 1. To add signup widget to the website you require ***jlcwidget.css*** and ***jlcwidget.js*** files, which allows you to customize your widget. However, if you don’t need to change the default styles, they can be downloaded (or linked to via code) directly from the repository:   
-	- [*https://raw.githubusercontent.com/jelastic/jelastic-widget/master/dist/jlcwidget.css*](https://raw.githubusercontent.com/jelastic/jelastic-widget/master/dist/jlcwidget.css)
-	- [*https://raw.githubusercontent.com/jelastic/jelastic-widget/master/dist/jlcwidget.js*](https://raw.githubusercontent.com/jelastic/jelastic-widget/master/dist/jlcwidget.js)
+  * [*https://raw.githubusercontent.com/jelastic/jelastic-widget/master/dist/jlcwidget.css*](https://raw.githubusercontent.com/jelastic/jelastic-widget/master/dist/jlcwidget.css)
+  * [*https://raw.githubusercontent.com/jelastic/jelastic-widget/master/dist/jlcwidget.js*](https://raw.githubusercontent.com/jelastic/jelastic-widget/master/dist/jlcwidget.js)
 
 2. Once you have the files, add the appropriate templates to your webpage code (anywhere within the ***header*** or ***body*** sections).
 
