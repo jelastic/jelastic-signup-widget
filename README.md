@@ -29,10 +29,10 @@ Don’t forget to substitute the ***{path}*** placeholder with the correct path.
 <div class="jlc-wrapper" data-text="{button-label}" data-tx-success="{success-text}" data-tx-error="{error-text}" data-key="{hoster-domain}"></div>
 ```
 Here, you should define your platform and, if needed, can apply texts localization:  
-	- ***{button-label}*** - the main button label (default value is “GET STARTED FOR FREE”)  
-	- ***{success-text}*** - text displayed upon success (default value is “CHECK YOUR EMAIL”)  
-	- ***{error-text}*** - text displayed upon error (default value is “An error has occurred, please try again later”)  
-	- ***{hoster-domain}*** - [domain name of the platform](https://docs.jelastic.com/jelastic-hoster-info), where a customer should be registered  
+  * ***{button-label}*** - the main button label (default value is “GET STARTED FOR FREE”)  
+  * ***{success-text}*** - text displayed upon success (default value is “CHECK YOUR EMAIL”)  
+  * ***{error-text}*** - text displayed upon error (default value is “An error has occurred, please try again later”)  
+  * ***{hoster-domain}*** - [domain name of the platform](https://docs.jelastic.com/jelastic-hoster-info), where a customer should be registered  
    
    
 ```Note
@@ -71,21 +71,21 @@ npm install -d*
 </p>
 
 4. Now, customize the widget by adjusting the following files:
-	- ***../jelastic-widget/assets/scss/jlcwidget.scss*** - defines the widget visual; some simple adjustments are described below:
-		- **$color-default** - sets the color of the widget (*$color-blue : #0088fb;* is set by default, *$color-green : #00bea7;* is additional default option)
-		- **$color-red** - defines the color of the error text
-		- **$bdrs** - customizes border radius of the button
-		- **$width** - sets a button size (pay attention to font-size of the **.jlc-btn** and **.jlc-input** selectors)
-		- **$font-family** - provides a font for the texts
-	- ***../jelastic-widget/assets/js/jlcwidget.js*** - adjusts the behavior of the widget
-		- **main variables** section - allows setting the default texts for the widget
-		- apply other changes only in case you know what you are doing
-	- ***../jelastic-widget/assets/img*** - stores default images for the widget. Be aware, uploading new images to the folder won’t apply any changes, you need to adjust the **background-image**: parameter(s) within the ***jlcwidget.scss*** file. For the best performance, we recommend using optimized images in the SVG format (e.g. with the [svgomg](https://jakearchibald.github.io/svgomg/) svgomg service) and add them with the BASE64 technology (e.g. via base64encode.org[base64encode.org](https://www.base64encode.org/) ).
-		- **check-icon.svg** - a white tick icon
-		- **loader.svg** - loading (request processing) animation
-		- **mail-black.svg** - a black envelope icon
-		- **mail-grey.svg** - a gray envelope icon
-		- **right-arrow.svg** - a white arrow icon
+  * ***../jelastic-widget/assets/scss/jlcwidget.scss*** - defines the widget visual; some simple adjustments are described below:
+    * **$color-default** - sets the color of the widget (*$color-blue : #0088fb;* is set by default, *$color-green : #00bea7;* is additional default option)
+    * **$color-red** - defines the color of the error text
+    * **$bdrs** - customizes border radius of the button
+    * **$width** - sets a button size (pay attention to font-size of the **.jlc-btn** and **.jlc-input** selectors)
+    * **$font-family** - provides a font for the texts
+  * ***../jelastic-widget/assets/js/jlcwidget.js*** - adjusts the behavior of the widget
+    * **main variables** section - allows setting the default texts for the widget
+    * apply other changes only in case you know what you are doing
+  * ***../jelastic-widget/assets/img*** - stores default images for the widget. Be aware, uploading new images to the folder won’t apply any changes, you need to adjust the **background-image**: parameter(s) within the ***jlcwidget.scss*** file. For the best performance, we recommend using optimized images in the SVG format (e.g. with the [svgomg](https://jakearchibald.github.io/svgomg/) svgomg service) and add them with the BASE64 technology (e.g. via base64encode.org[base64encode.org](https://www.base64encode.org/) ).
+    * **check-icon.svg** - a white tick icon
+    * **loader.svg** - loading (request processing) animation
+    * **mail-black.svg** - a black envelope icon
+    * **mail-grey.svg** - a gray envelope icon
+    * **right-arrow.svg** - a white arrow icon
 
 ```
 Tip: You can run the gulp serve command to start a test server with the real-time synchronization of the applied changes for the comfortable preview and troubleshooting.
