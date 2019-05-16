@@ -32,7 +32,7 @@ Here, you should define your platform and, if needed, can apply texts localizati
   * ***{button-label}*** - the main button label (default value is “GET STARTED FOR FREE”)  
   * ***{success-text}*** - text displayed upon success (default value is “CHECK YOUR EMAIL”)  
   * ***{error-text}*** - text displayed upon error (default value is “An error has occurred, please try again later”)  
-  * ***{hoster-domain}*** - [domain name of the platform](https://docs.jelastic.com/jelastic-hoster-info), where a customer should be registered  
+  * ***{hoster-domain}*** - [domain name of the platform](https://docs.jelastic.com/jelastic-hoster-info) (without ***app.*** at the beginning), where a customer should be registered  
    
    
 ```Note
