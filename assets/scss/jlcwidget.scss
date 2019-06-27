@@ -11,15 +11,21 @@ $color-red : red;
 $color-default: $color-blue;
 
 $bdrs: 10px;
+// base width, will be changed after document loaded, based on button content width
 $width: 280px;
+$height: 65px;
 $font-family: 'Open Sans', sans-serif;
 
 .jlc-wrapper {
+  /*temp */
   display: flex;
+  /* temp */
+  float: left;
   flex-direction: column;
 
   width: 100%;
   height: auto;
+  margin-right: 10px;
 
   font-family: $font-family;
 
@@ -30,23 +36,23 @@ $font-family: 'Open Sans', sans-serif;
 
 .jlc-cover {
   position: relative;
+  // overflow: hidden;
 
-  overflow: hidden;
   order: 2;
+  // width: $width;
 
-  min-width: $width;
-  max-width: 305px;
-  height: 65px;
+  height: $height;
 }
 
 .jlc-btn {
   position: absolute;
+  z-index: 2;
   top: 0;
   left: 0;
 
-  display: block;
+  display: inline-block;
 
-  min-width: 100%;
+  height: $height;
   margin: 0;
   padding: 0 1em;
 
@@ -67,7 +73,9 @@ $font-family: 'Open Sans', sans-serif;
   line-height: 65px;
 
   .is_active & {
-    transform: translateX(100%)
+    display: none;
+
+    transform: translateX(100%);
   }
 
   &:hover {
@@ -76,6 +84,8 @@ $font-family: 'Open Sans', sans-serif;
 }
 
 .jlc-form {
+  position: relative;
+
   display: flex;
 
   width: 100%;
@@ -90,6 +100,17 @@ $font-family: 'Open Sans', sans-serif;
   background-position: 25px center;
   background-size: 20px;
 
+  .is_active.jlc-cover--short & {
+    min-width: 210px;
+  }
+  .is_active.jlc-cover--medium & {
+    min-width: 270px;
+  }
+
+  .jlc-cover--short & {
+    background-image: none !important;
+  }
+
   &.jlc-form__focused {
     .jlc-sbmt {
       background-color: $color-dark;
@@ -101,10 +122,9 @@ $font-family: 'Open Sans', sans-serif;
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMS4wMTIgMzEuMDEyIj48ZyBmaWxsPSIjNWU2OTgxIj48cGF0aCBkPSJNMjUuMTA5IDIxLjUxYS40OTUuNDk1IDAgMCAxLS4zNDItLjEzNmwtNS43NTQtNS4zOThhLjUuNSAwIDEgMSAuNjg1LS43MjhsNS43NTQgNS4zOThhLjUuNSAwIDAgMS0uMzQzLjg2NHpNNS45MDIgMjEuNTFhLjUuNSAwIDAgMS0uMzQzLS44NjRsNS43NTYtNS4zOThhLjUuNSAwIDAgMSAuNjg1LjcyOGwtNS43NTYgNS4zOThhLjQ5NS40OTUgMCAwIDEtLjM0Mi4xMzZ6Ii8+PHBhdGggZD0iTTI4LjUxMiAyNi41MjlIMi41YTIuNTAzIDIuNTAzIDAgMCAxLTIuNS0yLjVWNi45ODJjMC0xLjM3OSAxLjEyMi0yLjUgMi41LTIuNWgyNi4wMTJjMS4zNzggMCAyLjUgMS4xMjEgMi41IDIuNXYxNy4wNDdjMCAxLjM3OS0xLjEyMiAyLjUtMi41IDIuNXpNMi41IDUuNDgyYy0uODI3IDAtMS41LjY3My0xLjUgMS41djE3LjA0N2MwIC44MjcuNjczIDEuNSAxLjUgMS41aDI2LjAxMmMuODI3IDAgMS41LS42NzMgMS41LTEuNVY2Ljk4MmMwLS44MjctLjY3My0xLjUtMS41LTEuNUgyLjV6Ii8+PHBhdGggZD0iTTE1LjUwNiAxOC4wMThjLS42NjUgMC0xLjMzLS4yMjEtMS44MzYtLjY2MkwuODMgNi4xNTVhLjUwMS41MDEgMCAwIDEtLjA0OS0uNzA2LjUwMy41MDMgMCAwIDEgLjcwNi0uMDQ4bDEyLjg0IDExLjJjLjYzOS41NTcgMS43MTkuNTU3IDIuMzU3IDBMMjkuNTA4IDUuNDE5YS41LjUgMCAwIDEgLjY1OC43NTRMMTcuMzQyIDE3LjM1NWMtLjUwNy40NDItMS4xNzEuNjYzLTEuODM2LjY2M3oiLz48L2c+PC9zdmc+");
 
     .jlc-sbmt {
-      background-size: 40px;
       // background-image: url(../img/loader.svg);
       background-image: url("data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ibGRzLXNwaW5uZXIiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiIHN0eWxlPSJiYWNrZ3JvdW5kOjAgMCI+PHJlY3QgeD0iNDUiIHk9IjciIHJ4PSIxOCIgcnk9IjIuOCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjI2IiBmaWxsPSIjZmZmIj48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiB2YWx1ZXM9IjE7MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxcyIgYmVnaW49Ii0wLjg3NXMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+PC9yZWN0PjxyZWN0IHg9IjQ1IiB5PSI3IiByeD0iMTgiIHJ5PSIyLjgiIHdpZHRoPSIxMCIgaGVpZ2h0PSIyNiIgZmlsbD0iI2ZmZiIgdHJhbnNmb3JtPSJyb3RhdGUoNDUgNTAgNTApIj48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiB2YWx1ZXM9IjE7MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxcyIgYmVnaW49Ii0wLjc1cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L3JlY3Q+PHJlY3QgeD0iNDUiIHk9IjciIHJ4PSIxOCIgcnk9IjIuOCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjI2IiBmaWxsPSIjZmZmIiB0cmFuc2Zvcm09InJvdGF0ZSg5MCA1MCA1MCkiPjxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9Im9wYWNpdHkiIHZhbHVlcz0iMTswIiBrZXlUaW1lcz0iMDsxIiBkdXI9IjFzIiBiZWdpbj0iLTAuNjI1cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L3JlY3Q+PHJlY3QgeD0iNDUiIHk9IjciIHJ4PSIxOCIgcnk9IjIuOCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjI2IiBmaWxsPSIjZmZmIiB0cmFuc2Zvcm09InJvdGF0ZSgxMzUgNTAgNTApIj48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiB2YWx1ZXM9IjE7MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxcyIgYmVnaW49Ii0wLjVzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIvPjwvcmVjdD48cmVjdCB4PSI0NSIgeT0iNyIgcng9IjE4IiByeT0iMi44IiB3aWR0aD0iMTAiIGhlaWdodD0iMjYiIGZpbGw9IiNmZmYiIHRyYW5zZm9ybT0icm90YXRlKDE4MCA1MCA1MCkiPjxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9Im9wYWNpdHkiIHZhbHVlcz0iMTswIiBrZXlUaW1lcz0iMDsxIiBkdXI9IjFzIiBiZWdpbj0iLTAuMzc1cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L3JlY3Q+PHJlY3QgeD0iNDUiIHk9IjciIHJ4PSIxOCIgcnk9IjIuOCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjI2IiBmaWxsPSIjZmZmIiB0cmFuc2Zvcm09InJvdGF0ZSgyMjUgNTAgNTApIj48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiB2YWx1ZXM9IjE7MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxcyIgYmVnaW49Ii0wLjI1cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L3JlY3Q+PHJlY3QgeD0iNDUiIHk9IjciIHJ4PSIxOCIgcnk9IjIuOCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjI2IiBmaWxsPSIjZmZmIiB0cmFuc2Zvcm09InJvdGF0ZSgyNzAgNTAgNTApIj48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiB2YWx1ZXM9IjE7MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxcyIgYmVnaW49Ii0wLjEyNXMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+PC9yZWN0PjxyZWN0IHg9IjQ1IiB5PSI3IiByeD0iMTgiIHJ5PSIyLjgiIHdpZHRoPSIxMCIgaGVpZ2h0PSIyNiIgZmlsbD0iI2ZmZiIgdHJhbnNmb3JtPSJyb3RhdGUoMzE1IDUwIDUwKSI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0ib3BhY2l0eSIgdmFsdWVzPSIxOzAiIGtleVRpbWVzPSIwOzEiIGR1cj0iMXMiIGJlZ2luPSIwcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L3JlY3Q+PC9zdmc+");
-
+      background-size: 40px;
     }
   }
 
@@ -122,6 +142,15 @@ $font-family: 'Open Sans', sans-serif;
       text-transform: uppercase;
 
       font-weight: 400;
+      .jlc-cover--short &,
+      .jlc-cover--medium & {
+        padding-left: 10px;
+
+        font-size: 12px;
+      }
+      .jlc-cover--succeeddef & {
+        font-size: 16px;
+      }
     }
   }
 }
@@ -147,12 +176,22 @@ $font-family: 'Open Sans', sans-serif;
   font-family: $font-family;
   font-size: 16px;
 
+  .jlc-cover--short &,
+  .jlc-cover--medium & {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
   &::placeholder {
     color: rgb(94, 105, 129);
   }
 }
 
 .jlc-sbmt {
+  position: absolute;
+  top: 0;
+  right: 0;
+
   width: 65px;
   padding: 0;
 

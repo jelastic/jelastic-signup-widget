@@ -1,6 +1,7 @@
 (function () {
   // init scripts
   const jlcWrapper = document.getElementsByClassName('jlc-wrapper')[0];
+  toggleShowWrapper(false)
 
   // main variables
   const jlc_button_text = jlcWrapper.getAttribute('data-text') || 'GET STARTED FOR FREE',
@@ -29,7 +30,6 @@
   const jlc_sbmt_element = CreateElement('button', { className : 'jlc-sbmt'});
   jlc_form_element.appendChild(jlc_sbmt_element);
 
-
   // EVENTS
   // init event listeners
   jlc_btn_element.addEventListener('click', showForm);
@@ -43,6 +43,16 @@
   jlc_input_element.addEventListener('focus', inputFocusFunction, true);
   jlc_input_element.addEventListener('blur', inputBlurFunction, true);
 
+  jlc_input_element.addEventListener("keypress", validateInputedEmail, false);
+
+  // base width will be changed after document loaded, based on button content width
+  // if you want to leave fixed button size - comment next string
+  document.onreadystatechange = function () {
+    if (document.readyState === 'complete') {
+      setFormWithByButton()
+      toggleShowWrapper(true)
+    }
+  }
   // FUNCTIONS
   /* create DOM element function.
     tagName - type of new html tag | string
@@ -74,8 +84,68 @@
     return element;
   }
 
+  function validateInputedEmail(element) {
+    let result = validateEmail(element.target.value);
+    if (result){
+      inputBlurFunction();
+    } else {
+      inputFocusFunction()
+    }
+  }
+
+  function validateEmail(email) {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
+  function setFormWithByButton(){
+    const jlc_btn_element_style = window.getComputedStyle ? getComputedStyle(jlc_btn_element, null) : jlc_btn_element.currentStyle;
+    const jlc_btn_element_width = Math.ceil(parseFloat(jlc_btn_element_style.width.replace(/[^0-9 | ^.]/g, ''))) || 0;
+    jlcWrapper.style.width = jlc_btn_element.style.width = jlc_btn_element_width + 'px';
+
+    if (jlc_btn_element_width < 230) {
+      vanilaAddClass(jlc_cover_element, 'jlc-cover--short')
+    } else if ((jlc_btn_element_width > 230) && (jlc_btn_element_width < 270)) {
+      vanilaAddClass(jlc_cover_element, 'jlc-cover--medium');
+    }
+    if (jlc_btn_element_width < 270) {
+      jlc_input_element.addEventListener("keypress", changeFormSize, false);
+    }
+  }
+
+  function changeFormSize() {
+    // disable on "Enter" key
+    if (event.keyCode !== 13) {
+      let newWidth = (110 + (this.value.length + 1) * 8);
+      jlc_form_element.style.width = newWidth + 'px';
+      if (newWidth > 230) {
+        vanilaAddClass(jlc_cover_element, 'jlc-cover--succeeddef')
+      } else {
+        vanilaRemoveClasss(jlc_cover_element, 'jlc-cover--succeeddef')
+      }
+    }
+  }
+
+  function toggleShowWrapper(status) {
+    let opacity = '0.5',
+    filter = 'blur(4px)'//,
+    // visibility = 'hidden';
+    if (status) {
+      opacity = '1',
+      filter = 'none'//,
+      // visibility = 'visible';
+    }
+    jlcWrapper.style.opacity = opacity;
+    jlcWrapper.style.filter = filter;
+    // jlcWrapper.style.visibility = visibility;
+  }
+
   function showForm() {
     vanilaAddClass(jlc_cover_element, 'is_active')
+    // TODO
+    const jlc_form_element_minWidth = window.getComputedStyle(jlc_form_element);
+    jlcWrapper.style.width = 'auto';
+    jlcWrapper.style.minWidth = jlc_form_element_minWidth;
   }
 
   function inputFocusFunction() {
@@ -129,6 +199,10 @@
           jlc_sbmt_element.disabled = true;
           jlc_input_element.disabled = true;
           jlc_input_element.value = jlc_text_success;
+          // if (jlc_cover_element.classList.contains('jlc-cover--short')) {
+          //   jlc_form_element.style.minWidth = '160px';
+          //   jlc_form_element.style.width = '195px';
+          // }
         }
       } else {
         // We reached our target server, but it returned an error
