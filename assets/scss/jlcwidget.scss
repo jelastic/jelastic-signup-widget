@@ -11,21 +11,15 @@ $color-red : red;
 $color-default: $color-blue;
 
 $bdrs: 10px;
-// base width, will be changed after document loaded, based on button content width
-$width: 280px;
 $height: 65px;
 $font-family: 'Open Sans', sans-serif;
 
 .jlc-wrapper {
-  /*temp */
   display: flex;
-  /* temp */
-  float: left;
   flex-direction: column;
 
   width: 100%;
   height: auto;
-  margin-right: 10px;
 
   font-family: $font-family;
 
@@ -39,7 +33,6 @@ $font-family: 'Open Sans', sans-serif;
   // overflow: hidden;
 
   order: 2;
-  // width: $width;
 
   height: $height;
 }
@@ -57,7 +50,6 @@ $font-family: 'Open Sans', sans-serif;
   padding: 0 1em;
 
   cursor: pointer;
-  // transition: all .5s ease;
   text-align: center;
 
   color: #fff;
@@ -107,7 +99,8 @@ $font-family: 'Open Sans', sans-serif;
     min-width: 270px;
   }
 
-  .jlc-cover--short & {
+  .jlc-cover--short &,
+  .jlc-cover--medium & {
     background-image: none !important;
   }
 
