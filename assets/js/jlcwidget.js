@@ -5,29 +5,42 @@
 
   // main variables
   const jlc_button_text = jlcWrapper.getAttribute('data-text') || 'GET STARTED FOR FREE',
-  jlc_text_error = jlcWrapper.getAttribute('data-tx-error') || 'An error has occurred, please try again later',
-  jlc_text_success = jlcWrapper.getAttribute('data-tx-success') || 'CHECK YOUR EMAIL',
-  jlc_hoster_domain = jlcWrapper.getAttribute('data-key') || 'jelastichosting.nl';
+    jlc_text_error = jlcWrapper.getAttribute('data-tx-error') || 'An error has occurred, please try again later',
+    jlc_text_success = jlcWrapper.getAttribute('data-tx-success') || 'CHECK YOUR EMAIL',
+    jlc_hoster_domain = jlcWrapper.getAttribute('data-key') || 'jelastichosting.nl';
 
   // create HTML elements
   // create main element
-  const jlc_cover_element = CreateElement('div', { className : 'jlc-cover'});
+  const jlc_cover_element = CreateElement('div', {
+    className: 'jlc-cover'
+  });
   jlcWrapper.appendChild(jlc_cover_element);
 
   // create main button
-  const jlc_btn_element = CreateElement('button', { className : 'jlc-btn'}, jlc_button_text);
+  const jlc_btn_element = CreateElement('button', {
+    className: 'jlc-btn'
+  }, jlc_button_text);
   jlc_cover_element.appendChild(jlc_btn_element);
 
   // create main form
-  const jlc_form_element = CreateElement('form', { className : 'jlc-form'});
+  const jlc_form_element = CreateElement('form', {
+    className: 'jlc-form'
+  });
   jlc_cover_element.appendChild(jlc_form_element);
 
   // create email input
-  const jlc_input_element = CreateElement('input', { className : 'jlc-input', placeholder : 'your@email.com', type : 'email', required : 'true'});
+  const jlc_input_element = CreateElement('input', {
+    className: 'jlc-input',
+    placeholder: 'your@email.com',
+    type: 'email',
+    required: 'true'
+  });
   jlc_form_element.appendChild(jlc_input_element);
 
   // create form button
-  const jlc_sbmt_element = CreateElement('button', { className : 'jlc-sbmt'});
+  const jlc_sbmt_element = CreateElement('button', {
+    className: 'jlc-sbmt'
+  });
   jlc_form_element.appendChild(jlc_sbmt_element);
 
   // EVENTS
@@ -42,7 +55,6 @@
 
   jlc_input_element.addEventListener('focus', inputFocusFunction, true);
   jlc_input_element.addEventListener('blur', inputBlurFunction, true);
-
   jlc_input_element.addEventListener("keypress", validateInputedEmail, false);
 
   // base width will be changed after document loaded, based on button content width
@@ -59,34 +71,29 @@
     attrs - element attributes, like class, placeholder ... | object {attribute_name : 'attribute_value'}
     text - inner text of element. leave blank if the block does not contain text | string
   */
-  function CreateElement(tagName, attrs, text){
+  function CreateElement(tagName, attrs, text) {
     const element = document.createElement(tagName);
-
     if (attrs) {
       for (let attribute in attrs) {
         let value = attrs[attribute];
-
         if (attribute === 'className') {
           attribute = 'class';
         }
-
         let element_attribute = document.createAttribute(attribute);
         element_attribute.value = value;
         element.setAttributeNode(element_attribute);
       }
     }
-
     if (text) {
       let element_content = document.createTextNode(text);
       element.appendChild(element_content);
     }
-
     return element;
   }
 
   function validateInputedEmail(element) {
     let result = validateEmail(element.target.value);
-    if (result){
+    if (result) {
       inputBlurFunction();
     } else {
       inputFocusFunction()
@@ -98,7 +105,7 @@
     return re.test(String(email).toLowerCase());
   }
 
-  function setFormWithByButton(){
+  function setFormWithByButton() {
     const jlc_btn_element_style = window.getComputedStyle ? getComputedStyle(jlc_btn_element, null) : jlc_btn_element.currentStyle;
     const jlc_btn_element_width = Math.ceil(parseFloat(jlc_btn_element_style.width.replace(/[^0-9 | ^.]/g, ''))) || 0;
     jlcWrapper.style.width = jlc_btn_element.style.width = jlc_btn_element_width + 'px';
@@ -117,7 +124,7 @@
     // disable on "Enter" key
     if (event.keyCode !== 13) {
       let newWidth = (110 + (this.value.length + 1) * 8);
-      jlc_form_element.style.width = newWidth + 'px';
+      jlcWrapper.style.width = newWidth + 'px';
       if (newWidth > 230) {
         vanilaAddClass(jlc_cover_element, 'jlc-cover--succeeddef')
       } else {
@@ -128,24 +135,23 @@
 
   function toggleShowWrapper(status) {
     let opacity = '0.5',
-    filter = 'blur(4px)'//,
-    // visibility = 'hidden';
+      filter = 'blur(4px)'
     if (status) {
       opacity = '1',
-      filter = 'none'//,
-      // visibility = 'visible';
+        filter = 'none'
     }
     jlcWrapper.style.opacity = opacity;
     jlcWrapper.style.filter = filter;
-    // jlcWrapper.style.visibility = visibility;
   }
 
   function showForm() {
     vanilaAddClass(jlc_cover_element, 'is_active')
     // TODO
-    const jlc_form_element_minWidth = window.getComputedStyle(jlc_form_element);
-    jlcWrapper.style.width = 'auto';
-    jlcWrapper.style.minWidth = jlc_form_element_minWidth;
+    const jlc_form_element_style = window.getComputedStyle(jlc_form_element);
+    const jlc_form_element_minWidth = jlc_form_element_style.getPropertyValue('min-width');
+    if (parseInt(jlc_form_element_minWidth) !== 0) {
+      jlcWrapper.style.width = jlcWrapper.style.minWidth = jlc_form_element_minWidth;
+    }
   }
 
   function inputFocusFunction() {
@@ -196,13 +202,8 @@
         if (resp.result === 0) {
           vanilaRemoveClasss(jlc_form_element, 'jlc-form__sending');
           vanilaAddClass(jlc_form_element, 'jlc-form__succeed')
-          jlc_sbmt_element.disabled = true;
-          jlc_input_element.disabled = true;
+          jlc_sbmt_element.disabled = jlc_input_element.disabled = true;
           jlc_input_element.value = jlc_text_success;
-          // if (jlc_cover_element.classList.contains('jlc-cover--short')) {
-          //   jlc_form_element.style.minWidth = '160px';
-          //   jlc_form_element.style.width = '195px';
-          // }
         }
       } else {
         // We reached our target server, but it returned an error
@@ -221,7 +222,9 @@
   }
 
   function showErrorMessage(message) {
-    const jlc_error_element = CreateElement('div', { class : 'jlc-error'}, message);
+    const jlc_error_element = CreateElement('div', {
+      class: 'jlc-error'
+    }, message);
     jlcWrapper.appendChild(jlc_error_element);
   }
 
