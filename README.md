@@ -1,14 +1,10 @@
 # Jelastic Signup Widget
-![Jelastic](https://jelastic.com/wp-content/themes/salient/img/logo.svg)
 
-This widget was created specifically for easy installation on any page and does not require any additional dependencies.
-It bases on usual html, js and css installed in all modern browsers.
-The initialization of the widget is in the background and does not appear at the page load speed.
-User email validation based on [default html5 email validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email#Validation)
+This widget is created specifically for easy installation on any page and does not require any additional dependencies. It bases on usual HTML, js, and CSS installed in all modern browsers. The initialization of the widget is in the background and does not appear at the page load speed. User email validation based on [default HTML5 email validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email#Validation).
 
 # Widget Installation
 
-Insert this code anywhere on the page, where you want to display the widget
+Insert this code anywhere on the page, where you want to display the widget:
 ```html
   <div class="jlc-wrapper"></div>
 ```
@@ -24,12 +20,10 @@ Replace `PATH_TO_TEMPLATE` in the example below with your theme template path an
 
 # Widget Customisation
 
-You can customize default button label or registration hoster.
-
-To do this, add to `<div class="jlc-wrapper"></div>` next attributes:
+You can add the following attributes to `<div class="jlc-wrapper"></div>` to redefine localization and target platform:
 
 - `data-text` - main button label
-- `data-tx-success` - succes text
+- `data-tx-success` - success text
 - `data-tx-error` - error text
 - `data-key` - hoster domain
 
@@ -37,17 +31,17 @@ To do this, add to `<div class="jlc-wrapper"></div>` next attributes:
   <div class="jlc-wrapper" data-text="GET STARTED FOR FREE" data-tx-success="CHECK YOUR EMAIL" data-tx-error="An error has occurred, please try again later" data-key="jelastichosting.nl"></div>
 ```
 
-Also you can edit default label and hoster in the `assets/js/jlcwidget.js` file in "main variables" part
+The default localization and hoster domain values are defined in the "main variables" section of the `assets/js/jlcwidget.js` file:
 
 ```JavaScript
-  // main variables
-  const jlc_button_text = jlcWrapper.getAttribute('data-text') || 'GET STARTED FOR FREE',
-  jlc_text_error = jlcWrapper.getAttribute('data-tx-error') || 'An error has occurred, please try again later',
-  jlc_text_success = jlcWrapper.getAttribute('data-tx-success') || 'CHECK YOUR EMAIL',
-  jlc_hoster_domain = jlcWrapper.getAttribute('data-key') || 'jelastichosting.nl';
+const jlc_button_text = wrapper.getAttribute('data-text') || 'GET STARTED FOR FREE';
+
+const jlc_text_error = wrapper.getAttribute('data-tx-error') || 'An error has occurred, please try again later',
+jlc_text_success = wrapper.getAttribute('data-tx-success') || 'CHECK YOUR EMAIL',
+jlc_hoster_domain = wrapper.getAttribute('data-key') || 'jelastichosting.nl';
 ```
 
-You can customise this widget with build system based on Gulp with [SCSS](https://sass-lang.com) preprocessor
+You can customize this widget with a build system based on Gulp with [SCSS](https://sass-lang.com) preprocessor.
 
 ### Features
 * CSS Autoprefixing
@@ -67,7 +61,7 @@ Requires [Node.js](https://nodejs.org/) v6+ and [Gulp](https://gulpjs.com/) v4+ 
 - Run `gulp serve` to start the server and watch for changes
 - Run `gulp default` to build for production environments
 
-You can change CSS in the `assets/css/jlcwidget.scss` file, for example default variables
+You can change CSS in the `assets/css/jlcwidget.scss` file, for example default variables:
 
 ```scss
 $color-blue : #0088fb; // default color (blue)
@@ -82,7 +76,7 @@ $width: 280px; // default button size (if you change it, pay attention to font-s
 $font-family: 'Open Sans', sans-serif;
 ```
 
-After build in the `dist` folder you will have
+After the build, you will have the following files in the `dist` folder:
 
 - `index.html` example with widget initialization selector
 - `jlcwidget.js` minified JavaScript
@@ -90,6 +84,6 @@ After build in the `dist` folder you will have
 
 #### Change images
 
-For the best performance all images saved in the SVG format, optimized with [svgomg service](https://jakearchibald.github.io/svgomg/) and included to the CSS/SCSS with BASE64 technology via [base64encode.org](https://www.base64encode.org/)
+For the best performance all images saved in the SVG format, optimized with [svgomg service](https://jakearchibald.github.io/svgomg/) and included to the CSS/SCSS with BASE64 technology via [base64encode.org](https://www.base64encode.org/).
 
-Non converted images you can find in `assets/img/` folder
+Non converted images you can find in `assets/img/` folder.
