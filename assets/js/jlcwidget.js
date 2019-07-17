@@ -5,7 +5,6 @@
   Array.from(wrapper_elements).forEach((wrapper) => {
     ToggleShowElement(wrapper, false);
 
-    // main variables
     const jlc_button_text = wrapper.getAttribute('data-text') || 'GET STARTED FOR FREE';
 
     // create HTML elements
@@ -56,12 +55,6 @@
     jlc_input_element.addEventListener('blur', InputBlurFunction, true);
     jlc_input_element.addEventListener("keypress", ValidateInputedEmail, false);
 
-    // base width will be changed after document loaded, based on button content width
-    // if you want to leave fixed button size - comment next string
-
-
-
-
   });
 
   document.onreadystatechange = function () {
@@ -73,7 +66,6 @@
 
     }
   }
-
 
   // FUNCTIONS
   /* create DOM element function.
@@ -180,7 +172,6 @@
     return element;
   }
 
-
   function ShowErrorMessage(message) {
     const jlc_error_element = CreateElement('div', {
       class: 'jlc-error'
@@ -230,7 +221,7 @@
 
     VanilaAddClass(jlc_form_element, 'jlc-form__sending');
 
-    // check if error is shown and delete it
+    // check if error message is shown and delete it
     let jlc_error_element = document.getElementsByClassName('jlc-error')[0];
     if (typeof (jlc_error_element) != 'undefined' && jlc_error_element != null) {
       wrapper.removeChild(jlc_error_element)
