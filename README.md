@@ -55,7 +55,7 @@ You can customize this widget with a build system based on Gulp with [SCSS](http
 Requires [Node.js](https://nodejs.org/) v6+ and [Gulp](https://gulpjs.com/) v4+ to run.
 
 - Install Gulp: `npm install gulp --global`
-- [Clone localy](https://confluence.atlassian.com/bitbucket/clone-a-repository-223217891.html) `git clone git@github.com:VitaliiAntoniukM/jelastic-widget.git`
+- [Clone localy](https://confluence.atlassian.com/bitbucket/clone-a-repository-223217891.html) `git clone https://github.com/jelastic/jelastic-widget.git`
 - Go to project folder `cd jelastic-widget`
 - Install dependencies `npm install -d`
 - Run `gulp serve` to start the server and watch for changes
