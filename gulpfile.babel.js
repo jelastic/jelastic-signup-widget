@@ -128,7 +128,7 @@ gulp.task('images', function() {
 
 // Optimize script
 gulp.task('scripts', function() {
-  return gulp.src(config.path.scripts.src)
+  return gulp.src(config.path.scripts.srcfiles)
     .pipe(customPlumber('Error Running Scripts'))
     .pipe(plugins.newer(config.path.scripts.dest))
     .pipe(customPlumber('Error Compiling Scripts'))

@@ -17,7 +17,8 @@
       "dest": "./dist/"
     },
     "scripts": {
-      "src": "assets/js/**",
+      "src": "assets/js/",
+      "srcfiles": "assets/js/**/*.js",
       "dest": "./dist/"
     }
   }
