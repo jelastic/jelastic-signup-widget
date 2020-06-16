@@ -25,10 +25,12 @@ You can add the following attributes to `<div class="jlc-wrapper"></div>` to red
 - `data-text` - main button label
 - `data-tx-success` - success text
 - `data-tx-error` - error text
+- `data-tx-exist` - text displayed if the provided email address is already registered on the platform
+- `data-tx-exist-linked` - label for the sign in link for the already existing user
 - `data-key` - hoster domain
 
 ```html
-  <div class="jlc-wrapper" data-text="GET STARTED FOR FREE" data-tx-success="CHECK YOUR EMAIL" data-tx-error="An error has occurred, please try again later" data-key="jelastichosting.nl"></div>
+  <div class="jlc-wrapper" data-tx-exist="This email is already registered.<br>Please " data-tx-exist-linked="sign in to access" data-text="GET STARTED NOW" data-tx-success="CHECK YOUR EMAIL" data-tx-error="An error has occurred, please try again later" data-key="jelastichosting.nl"></div>
 ```
 
 The default localization and hoster domain values are defined in the "main variables" section of the `assets/js/jlcwidget.js` file:
@@ -36,9 +38,11 @@ The default localization and hoster domain values are defined in the "main varia
 ```JavaScript
 const jlc_button_text = wrapper.getAttribute('data-text') || 'GET STARTED FOR FREE';
 
-const jlc_text_error = wrapper.getAttribute('data-tx-error') || 'An error has occurred, please try again later',
-jlc_text_success = wrapper.getAttribute('data-tx-success') || 'CHECK YOUR EMAIL',
-jlc_hoster_domain = wrapper.getAttribute('data-key') || 'jelastichosting.nl';
+var jlc_text_error = wrapper.getAttribute('data-tx-error') || 'An error has occurred, please try again later',
+            jlc_text_exist = wrapper.getAttribute('data-tx-exist') || 'This email is already registered.<br>Please ',
+            jlc_text_exist_linked = wrapper.getAttribute('data-tx-exist-linked') || 'sign in to access',
+            jlc_text_success = wrapper.getAttribute('data-tx-success') || 'CHECK YOUR EMAIL',
+            jlc_hoster_domain = wrapper.getAttribute('data-key') || 'jelastichosting.nl';
 ```
 
 You can customize this widget with a build system based on Gulp with [SCSS](https://sass-lang.com) preprocessor.
@@ -70,9 +74,13 @@ $color-gray : #efefef;
 $color-medium : #6b758a;
 $color-dark : #5e6981;
 $color-red : red; // default error color
+$color-exist: #ff7700;
+$color-default: $color-blue;
+$color-link: $color-blue;
 
 $bdrs: 10px; // button border radius
-$width: 280px; // default button size (if you change it, pay attention to font-size of the `.jlc-btn` and `.jlc-input` selectors)
+$width: 270px; // default button size
+$height: 65px;
 $font-family: 'Open Sans', sans-serif;
 ```
 
