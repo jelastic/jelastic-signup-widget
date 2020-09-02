@@ -184,6 +184,10 @@
             jlc_text_success = wrapper.getAttribute('data-tx-success') || 'CHECK YOUR EMAIL',
             jlc_hoster_domain = wrapper.getAttribute('data-key') || 'jelastichosting.nl';
 
+        if (jlc_hoster_domain.indexOf('app.') > -1) {
+            jlc_hoster_domain = jlc_hoster_domain.replace('app.', '');
+        }
+
         VanilaAddClass(jlc_form_element, 'jlc-form__sending');
 
         // check if error message is shown and delete it
