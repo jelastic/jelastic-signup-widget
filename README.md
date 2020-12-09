@@ -28,9 +28,12 @@ You can add the following attributes to `<div class="jlc-wrapper"></div>` to red
 - `data-tx-exist` - text displayed if the provided email address is already registered on the platform
 - `data-tx-exist-linked` - label for the sign in link for the already existing user
 - `data-key` - hoster domain
+- `data-terms` - (true/false) enable terms and privacy checkbox under form
+- `data-terms-link` - link to Terms of Use page
+- `data-privacy-link` - liink to Privacy Policy page
 
 ```html
-  <div class="jlc-wrapper" data-tx-exist="This email is already registered.<br>Please " data-tx-exist-linked="sign in to access" data-text="GET STARTED NOW" data-tx-success="CHECK YOUR EMAIL" data-tx-error="An error has occurred, please try again later" data-key="jelastichosting.nl"></div>
+  <div class="jlc-wrapper" data-tx-exist="This email is already registered.<br>Please " data-tx-exist-linked="sign in to access" data-text="GET STARTED NOW" data-tx-success="CHECK YOUR EMAIL" data-tx-error="An error has occurred, please try again later" data-key="jelastichosting.nl" data-terms="true" data-terms-link="//example.com/" data-privacy-link="//example.com/"></div>
 ```
 
 The default localization and hoster domain values are defined in the "main variables" section of the `assets/js/jlcwidget.js` file:

@@ -60,6 +60,7 @@ $width: 270px;
       transform: translateX(100%);
     }
 
+
     .jlc-btn {
       position: absolute;
       z-index: 2;
@@ -133,16 +134,19 @@ $width: 270px;
     }
 
     .jlc-form {
-      position: relative;
-      display: flex;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      border-radius: $bdrs;
-      background-color: $color-gray;
-      background-repeat: no-repeat;
-      background-position: 25px center;
-      background-size: 20px;
+
+      .jlc-input-wrapper {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        border-radius: $bdrs;
+        background-color: $color-gray;
+        background-repeat: no-repeat;
+        background-position: 25px center;
+        background-size: 20px;
+      }
 
       &.jlc-form__valid {
         .jlc-sbmt {
@@ -176,6 +180,33 @@ $width: 270px;
 
         }
       }
+
+
+    }
+
+    .jlc-terms-label {
+      margin-top: .6em;
+      font-size: 11px;
+      vertical-align: baseline;
+      display: none;
+      color: #5e6981;
+      line-height: 1.4;
+      input {
+        margin: 1px 0 0;
+        float: left;
+      }
+      span {
+        display: table-cell;
+        padding-left: 0.3em;
+        a {
+          color: inherit;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &.is_active .jlc-terms-label {
+      display: inline-block;
     }
 
   }
