@@ -101,9 +101,6 @@ gulp.task('images', function() {
       plugins.imagemin.gifsicle({
         interlaced: true
       }),
-      plugins.imagemin.jpegtran({
-        progressive: true
-      }),
       plugins.imagemin.optipng({
         optimizationLevel: 5
       }),

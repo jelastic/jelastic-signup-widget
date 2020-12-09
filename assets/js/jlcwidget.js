@@ -6,6 +6,9 @@
         ToggleShowElement(wrapper, false);
 
         const jlc_button_text = wrapper.getAttribute('data-text') || 'GET STARTED NOW';
+        var has_label = wrapper.getAttribute('data-terms') || false;
+        var terms_link = wrapper.getAttribute('data-terms-link') || '#';
+        var privacy_links = wrapper.getAttribute('data-privacy-link') || '#';
 
         // create HTML elements
         // create main element
@@ -26,6 +29,11 @@
         });
         jlc_cover_element.appendChild(jlc_form_element);
 
+        const jlc_input_wrapper_element = CreateElement('div', {
+            className: 'jlc-input-wrapper'
+        });
+        jlc_form_element.appendChild(jlc_input_wrapper_element);
+
         // create email input
         const jlc_input_element = CreateElement('input', {
             className: 'jlc-input',
@@ -33,13 +41,35 @@
             type: 'email',
             required: 'true'
         });
-        jlc_form_element.appendChild(jlc_input_element);
+        jlc_input_wrapper_element.appendChild(jlc_input_element);
 
         // create form button
         const jlc_sbmt_element = CreateElement('button', {
             className: 'jlc-sbmt'
         });
-        jlc_form_element.appendChild(jlc_sbmt_element);
+        jlc_input_wrapper_element.appendChild(jlc_sbmt_element);
+
+        if (has_label !== "false" || has_label === false) {
+
+            const jlc_terms_element = CreateElement('label', {
+                className: 'jlc-terms-label'
+            });
+            jlc_form_element.appendChild(jlc_terms_element);
+
+            const jlc_terms_input_element = CreateElement('input', {
+                type: 'checkbox',
+                name: 'accept_terms',
+                className: 'jlc-terms-checkbox',
+                required: 'required'
+            });
+            jlc_terms_element.appendChild(jlc_terms_input_element);
+
+            const jlc_terms_text_element = CreateElement('span', null, 'Read and accept <a target="_blank" href="' + terms_link + '">Terms of Use</a> & <a target="_blank" href="' + privacy_links + '">Privacy Policy</a>');
+            jlc_terms_element.appendChild(jlc_terms_text_element);
+
+            jlc_terms_input_element.addEventListener("change", ValidateForm, false);
+
+        }
 
         // EVENTS
         // show form
@@ -51,8 +81,8 @@
             jlc_form_element.attachEvent('onsubmit', SubmitForm); //Old IE
         }
 
-        jlc_input_element.addEventListener("change", ValidateInputedEmail, false);
-        jlc_input_element.addEventListener("keyup", ValidateInputedEmail, false);
+        jlc_input_element.addEventListener("change", ValidateForm, false);
+        jlc_input_element.addEventListener("keyup", ValidateForm, false);
 
     });
 
@@ -118,12 +148,19 @@
         }
     }
 
-    function ValidateInputedEmail(event) {
+    function ValidateForm(event) {
         const element = event.target;
         const wrapper = FindClosestAncestor(element, '.jlc-wrapper');
         const jlc_form_element = wrapper.getElementsByClassName("jlc-form")[0];
-        let result = ValidateEmail(event.target.value);
-        if (result) {
+        const email = jlc_form_element.getElementsByClassName("jlc-input")[0];
+        const has_label = wrapper.getAttribute('data-terms') || false;
+        var terms_checked = false;
+        if (has_label !== "false" || has_label === false) {
+            terms_checked = wrapper.getElementsByClassName("jlc-terms-checkbox")[0].checked;
+        }
+        
+        let result = ValidateEmail(email.value);
+        if (result && terms_checked) {
             VanilaAddClass(jlc_form_element, 'jlc-form__valid');
         } else {
             VanilaRemoveClasss(jlc_form_element, 'jlc-form__valid')
