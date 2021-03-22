@@ -1,6 +1,7 @@
 (function () {
     // init scripts
     const wrapper_elements = document.getElementsByClassName('jlc-wrapper');
+    var galoaded = document.querySelector('script[src*="google-analytics.com/analytics.js"]');
 
     Array.from(wrapper_elements).forEach((wrapper) => {
         ToggleShowElement(wrapper, false);
@@ -9,6 +10,17 @@
         var has_label = wrapper.getAttribute('data-terms') || false;
         var terms_link = wrapper.getAttribute('data-terms-link') || '#';
         var privacy_links = wrapper.getAttribute('data-privacy-link') || '#';
+        var gacode = wrapper.getAttribute('data-track-ga') || false;
+        galoaded = document.querySelector('script[src*="google-analytics.com/analytics.js"]');
+
+        if(!galoaded && !!gacode) {
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            ga('create', gacode, 'auto', {'allowLinker': true});
+            ga('require', 'linker');
+            ga('linker:autoLink', ['jelastic.cloud']);
+            ga('send', 'pageview');
+
+        }
 
         // create HTML elements
         // create main element
@@ -39,6 +51,7 @@
             className: 'jlc-input',
             placeholder: 'your@email.com',
             type: 'email',
+            name: 'email',
             required: 'true'
         });
         jlc_input_wrapper_element.appendChild(jlc_input_element);
@@ -84,16 +97,9 @@
         jlc_input_element.addEventListener("change", ValidateForm, false);
         jlc_input_element.addEventListener("keyup", ValidateForm, false);
 
+        ToggleShowElement(wrapper, true)
+
     });
-
-    document.onreadystatechange = function () {
-        if (document.readyState === 'complete') {
-            Array.from(wrapper_elements).forEach((wrapper) => {
-                ToggleShowElement(wrapper, true)
-            })
-
-        }
-    }
 
     // FUNCTIONS
     /* create DOM element function.
@@ -158,7 +164,7 @@
         if (has_label !== "false" || has_label === false) {
             terms_checked = wrapper.getElementsByClassName("jlc-terms-checkbox")[0].checked;
         }
-        
+
         let result = ValidateEmail(email.value);
         if (result && terms_checked) {
             VanilaAddClass(jlc_form_element, 'jlc-form__valid');
@@ -207,6 +213,48 @@
         return re.test(String(email).toLowerCase());
     }
 
+    function trackGA(oParams) {
+
+        var oOptions = {
+            "hitType": "event",
+            "eventCategory": oParams.category,
+            "eventAction": oParams.action || '',
+            "eventLabel": oParams.label || ''
+        };
+
+        if (Object.prototype.hasOwnProperty.call(oParams, "value")) {
+            oOptions.eventValue = oParams.value;
+        }
+
+        if (window.ga) {
+            ga("send", oOptions);
+        }
+
+        if (oOptions.hitCallback) {
+            if (window.ga) {
+                setTimeout(oParams.hitCallback, 1500);
+            } else {
+                oOptions.hitCallback();
+            }
+        }
+    }
+
+    function trackSignupSuccess(sHoster, sMsg) {
+        trackGA({
+            category: "signup-widget-success",
+            action: sHoster,
+            label: sMsg,
+        });
+    }
+
+    function trackSignupError(sHoster, sMsg) {
+        trackGA({
+            category: "signup-widget-error",
+            action: sHoster,
+            label: sMsg
+        });
+    }
+
     function SubmitForm(event) {
         event.preventDefault();
 
@@ -219,8 +267,9 @@
             jlc_text_exist = wrapper.getAttribute('data-tx-exist') || 'This email is already registered.<br>Please ',
             jlc_text_exist_linked = wrapper.getAttribute('data-tx-exist-linked') || 'sign in to access',
             jlc_text_success = wrapper.getAttribute('data-tx-success') || 'CHECK YOUR EMAIL',
-            jlc_hoster_domain = wrapper.getAttribute('data-key') || 'jelastichosting.nl';
-
+            jlc_hoster_domain = wrapper.getAttribute('data-key') || 'jelastichosting.nl',
+            trackEvent = !!wrapper.getAttribute('data-track-ga') || false;
+        
         if (jlc_hoster_domain.indexOf('app.') > -1) {
             jlc_hoster_domain = jlc_hoster_domain.replace('app.', '');
         }
@@ -239,6 +288,10 @@
         const request = new XMLHttpRequest();
         const request_params = 'email=' + email;
 
+        var msg = {
+            email: email
+        };
+
         request.open('POST', requestUrl, true);
         request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -252,23 +305,37 @@
                     if (resp.response.exist && resp.response.activated) {
                         ShowErrorMessage(wrapper, jlc_text_exist, 'user-exist');
                         VanilaRemoveClasss(jlc_form_element, 'jlc-form__sending');
+                        if (trackEvent) {
+                            msg['error'] = 'user exist';
+                            trackSignupError(jlc_hoster_domain, JSON.stringify(msg));
+                        }
                     } else {
                         VanilaRemoveClasss(jlc_form_element, 'jlc-form__sending');
                         VanilaAddClass(jlc_form_element, 'jlc-form__succeed')
                         jlc_sbmt_element.disabled = jlc_input_element.disabled = true;
                         jlc_input_element.value = jlc_text_success;
+                        if (trackEvent){
+                            trackSignupSuccess(jlc_hoster_domain, JSON.stringify(msg));
+                        }
                     }
                 }
             } else {
-                // We reached our target server, but it returned an error
                 ShowErrorMessage(wrapper, jlc_text_error);
                 VanilaRemoveClasss(jlc_form_element, 'jlc-form__sending');
+                if (trackEvent) {
+                    msg['error'] = 'We reached our target server, but it returned an error';
+                    trackSignupError(jlc_hoster_domain, JSON.stringify(msg));
+                }
             }
+
         }
         request.onerror = function (e) {
-            // There was a connection error of some sort
             ShowErrorMessage(wrapper, jlc_text_error);
             VanilaRemoveClasss(jlc_form_element, 'jlc-form__sending');
+            if (trackEvent) {
+                msg['error'] = 'There was a connection error of some sort';
+                trackSignupError(jlc_hoster_domain, JSON.stringify(msg));
+            }
         }
         request.send(request_params);
     }
